@@ -1,0 +1,6 @@
+name: RivalMC-Paper-Core
+version: '1.0.0'
+main: cc.rivalmc.core.CorePlugin
+api-version: '1.19'
+authors: [ hubailmn, babyless, flennn, canable ]
+website: https://discord.hubailmn.cc
