@@ -1,4 +1,4 @@
-package cc.rivalmc.core;
+package cc.rivalmc.papercore;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

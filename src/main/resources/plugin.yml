@@ -1,6 +1,27 @@
-name: RivalMC-Paper-Core
-version: '1.0.0'
-main: cc.rivalmc.core.CorePlugin
+name: RivalMC-PaperCore
+main: cc.rivalmc.papercore.CorePlugin
+description: >
+  The core plugin for RivalMC's Paper servers, providing staff tools, essentials commands,
+  chat formatting, player profiles, punishment systems, and more.
+
+version: '1.0'
 api-version: '1.19'
-authors: [ hubailmn, babyless, flennn, canable ]
-website: https://discord.hubailmn.cc
+
+website: https://store.rivalmc.cc
+
+authors:
+  - RivalMC
+  - hubailmn
+  - Babyless
+  - RobloxChild
+  - flennium
+  - canable
+  - w8o
+  - lMhmd
+  - TehcnoKsa
+  - DarkEpic
+  - wpn_1
+
+libraries:
+  - "net.dv8tion:JDA:5.6.1"
+  - "com.github.ben-manes.caffeine:caffeine:3.2.0"
