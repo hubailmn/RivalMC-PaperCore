@@ -1,4 +1,4 @@
-package cc.rivalmc.papercore.feature.examplemenuforbabyless;
+package cc.rivalmc.papercore.feature.examplemenuforbabyless.menu;
 
 import cc.hubailmn.utility.interaction.SoundUtil;
 import cc.hubailmn.utility.menu.annotation.Menu;

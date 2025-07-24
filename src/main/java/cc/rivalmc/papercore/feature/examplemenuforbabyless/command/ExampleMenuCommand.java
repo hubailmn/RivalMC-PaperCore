@@ -3,7 +3,7 @@ package cc.rivalmc.papercore.feature.examplemenuforbabyless.command;
 import cc.hubailmn.utility.command.CommandBuilder;
 import cc.hubailmn.utility.command.annotation.Command;
 import cc.hubailmn.utility.interaction.SoundUtil;
-import cc.rivalmc.papercore.feature.examplemenuforbabyless.BasicMenu;
+import cc.rivalmc.papercore.feature.examplemenuforbabyless.menu.BasicMenu;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

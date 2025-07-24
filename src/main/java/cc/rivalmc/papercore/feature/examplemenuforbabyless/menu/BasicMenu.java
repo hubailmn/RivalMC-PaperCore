@@ -1,7 +1,8 @@
-package cc.rivalmc.papercore.feature.examplemenuforbabyless;
+package cc.rivalmc.papercore.feature.examplemenuforbabyless.menu;
 
 import cc.hubailmn.utility.BasePlugin;
 import cc.hubailmn.utility.interaction.SoundUtil;
+import cc.hubailmn.utility.interaction.player.PlayerMessageUtil;
 import cc.hubailmn.utility.item.ItemBuilder;
 import cc.hubailmn.utility.listener.ChatInputManager;
 import cc.hubailmn.utility.menu.MenuLayout;
@@ -34,15 +35,18 @@ public class BasicMenu extends MenuBuilder {
                         MenuLayout.getSlot(5, 2),
                         new ItemBuilder()
                                 .material(Material.DIAMOND_SWORD)
-                                .name("FUCKING MENU")
+                                .name("§eBelieve it or not but this is a menu! :smirk:")
                                 .lore(List.of(
-                                        "§7Click open a menu with your heads"
+                                        "§7Click open a menu with your heads",
+                                        "§7and see how cool it is! :D",
+                                        ""
                                 ))
                                 .build(),
                         player -> {
                             player.closeInventory();
+                            SoundUtil.play(player, SoundUtil.SoundType.CLICK);
+                            PlayerMessageUtil.title(player, "§aEnter your input in chat", ":D");
                             ChatInputManager.ask(player, "§eHow Many Heads you want to see?", input -> {
-
                                 int heads;
                                 try {
                                     heads = Integer.parseInt(input);
