@@ -1,4 +1,4 @@
-package cc.rivalmc.papercore.feature.examplemenuforbabyless.menu;
+package cc.rivalmc.papercore.feature.rankmenu.menu;
 
 import cc.hubailmn.utility.BasePlugin;
 import cc.hubailmn.utility.interaction.SoundUtil;
@@ -9,6 +9,7 @@ import cc.hubailmn.utility.menu.MenuLayout;
 import cc.hubailmn.utility.menu.annotation.Menu;
 import cc.hubailmn.utility.menu.interactive.GuiSlotButton;
 import cc.hubailmn.utility.menu.type.MenuBuilder;
+import cc.rivalmc.papercore.feature.examplemenuforbabyless.menu.PagedMenu;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -16,14 +17,14 @@ import org.bukkit.inventory.Inventory;
 import java.util.List;
 
 @Menu(
-        title = "§7Hello World!",
+        title = "§6&lRank Menu",
         rows = 3
 )
-public class BasicMenu extends MenuBuilder {
+public class RankMenu extends MenuBuilder {
 
     // Create this method
     public static void open(Player player) {
-        new BasicMenu().display(player);
+        new RankMenu().display(player);
         SoundUtil.play(player, SoundUtil.SoundType.CONFIRM);
     }
 
