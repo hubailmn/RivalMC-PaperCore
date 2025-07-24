@@ -169,11 +169,11 @@
 
 
         <!-- Bukkit / Minecraft Related Libraries: Helpers and utilities specific to Minecraft server development -->
-        <dependency>
-            <groupId>com.github.hubailmn</groupId>
-            <artifactId>Utility</artifactId>
-            <version>v1.1.7</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.hubailmn</groupId>-->
+<!--            <artifactId>Utility</artifactId>-->
+<!--            <version>v1.1.7</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.mojang</groupId>

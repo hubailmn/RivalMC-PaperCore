@@ -10,18 +10,21 @@ api-version: '1.19'
 website: https://store.rivalmc.cc
 
 authors:
-  - RivalMC
-  - hubailmn
   - Babyless
-  - RobloxChild
   - flennium
-  - canable
-  - w8o
-  - lMhmd
-  - TehcnoKsa
-  - DarkEpic
-  - wpn_1
+  - hubailmn
+  - RivalMC
+  - RobloxChild
 
 libraries:
   - "net.dv8tion:JDA:5.6.1"
   - "com.github.ben-manes.caffeine:caffeine:3.2.0"
+  - "org.graalvm.js:js-scriptengine:24.2.1"
+  - "org.graalvm.js:js-language:24.2.1"
+
+depend:
+  - WorldGuard
+  - WGRegionEvents
+
+softdepend:
+  - PlaceholderAPI

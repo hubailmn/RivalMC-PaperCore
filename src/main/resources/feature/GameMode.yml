@@ -1,0 +1,4 @@
+GameMode:
+  switch-on-join:
+    enabled: true
+    gamemode: SURVIVAL

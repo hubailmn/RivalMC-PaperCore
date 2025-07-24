@@ -1,16 +1,28 @@
 package cc.rivalmc.papercore;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import cc.hubailmn.utility.BasePlugin;
 
-public final class CorePlugin extends JavaPlugin {
+public final class CorePlugin extends BasePlugin {
+
+    @Override
+    protected void preEnable() {
+        setSendPluginUsage(false);
+        setBasePackage(CorePlugin.class);
+        setScanFullPackage(true);
+
+        setDatabase(true);
+        setDiscord(true);
+
+        setForceDebug(true);
+    }
 
     @Override
     public void onEnable() {
-
+        super.onEnable();
     }
 
     @Override
     public void onDisable() {
-
+        super.onDisable();
     }
 }
