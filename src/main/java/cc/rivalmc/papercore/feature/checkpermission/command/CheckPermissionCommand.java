@@ -13,7 +13,6 @@ import org.bukkit.command.CommandSender;
 )
 public class CheckPermissionCommand extends CommandBuilder {
 
-
     @Override
     public boolean perform(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (args.length == 0) {
@@ -21,8 +20,8 @@ public class CheckPermissionCommand extends CommandBuilder {
             return true;
         }
 
-        System.out.println("work");
-        GrantManager.getUsersWithPermission(args[0]).forEach(user -> sender.sendMessage("%s &e> &a%s".formatted(BasePlugin.getPrefix(), user)));
+        GrantManager.getUsersWithPermission(args[0])
+                .forEach(user -> sender.sendMessage("%s &e> &a%s".formatted(BasePlugin.getPrefix(), user)));
 
         return true;
     }

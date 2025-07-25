@@ -4,8 +4,6 @@ import cc.hubailmn.utility.BasePlugin;
 import cc.hubailmn.utility.command.CommandBuilder;
 import cc.hubailmn.utility.command.TabComplete;
 import cc.hubailmn.utility.command.annotation.Command;
-import cc.hubailmn.utility.interaction.SoundUtil;
-import cc.rivalmc.papercore.CorePlugin;
 import cc.rivalmc.papercore.feature.grant.manager.GrantManager;
 import cc.rivalmc.papercore.feature.grant.menu.GrantMenu;
 import org.bukkit.Bukkit;
@@ -28,17 +26,16 @@ public class GrantCommand extends CommandBuilder {
             return true;
         }
 
-        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
-        GrantManager.selectGrant(player, offlinePlayer);
-            GrantMenu.open(player);
-        SoundUtil.play(player, SoundUtil.SoundType.OPEN_MENU);
+        OfflinePlayer targetPlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
+        GrantManager.selectGrant(player, targetPlayer);
+        GrantMenu.open(player, targetPlayer);
         return true;
     }
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
         TabComplete tabComplete = new TabComplete(sender, command, label, args);
-        if(args.length == 1) {
+        if (args.length == 1) {
             tabComplete.add(1, Bukkit.getOnlinePlayers().stream().map(Player::getName).toArray(String[]::new));
         }
         return tabComplete.build();

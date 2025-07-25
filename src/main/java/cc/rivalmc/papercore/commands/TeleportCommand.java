@@ -23,20 +23,23 @@ public class TeleportCommand extends CommandBuilder {
             sender.sendMessage(BasePlugin.getPrefix() + "§c Only players can use this command.");
             return true;
         }
-//        TODO: ADD IsVanish
-        if(!player.hasPermission("rivalmc.teleport.admin")) {
+
+        if (!player.hasPermission("rivalmc.teleport.admin")) {
             player.sendMessage("%s §cYou need to be on vanish mode to use this!".formatted(BasePlugin.getPrefix()));
             return true;
         }
-        if(args.length == 0) {
+
+        if (args.length == 0) {
             player.sendMessage("%s §cChoose a player to teleport to".formatted(BasePlugin.getPrefix()));
             return true;
         }
+
         Player target = Bukkit.getPlayer(args[0]);
-        if(target == null) {
+        if (target == null) {
             player.sendMessage("%s §cPlayer Not Found!".formatted(BasePlugin.getPrefix()));
             return true;
         }
+
         Location loc = target.getLocation();
         player.teleport(loc);
         player.sendMessage("%s §7Teleported to §a%s".formatted(BasePlugin.getPrefix(), target.getName()));
@@ -47,7 +50,7 @@ public class TeleportCommand extends CommandBuilder {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
         TabComplete tabComplete = new TabComplete(sender, command, label, args);
-        if(args.length == 1) {
+        if (args.length == 1) {
             tabComplete.add(1, Bukkit.getOnlinePlayers().stream().map(Player::getName).toArray(String[]::new));
         }
         return tabComplete.build();

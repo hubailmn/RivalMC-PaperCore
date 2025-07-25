@@ -3,6 +3,7 @@ package cc.rivalmc.papercore.feature.grant.manager;
 import cc.rivalmc.papercore.CorePlugin;
 import cc.rivalmc.papercore.feature.grant.data.RankSelector;
 import net.luckperms.api.LuckPerms;
+import net.luckperms.api.model.data.TemporaryNodeMergeStrategy;
 import net.luckperms.api.model.group.Group;
 import net.luckperms.api.model.group.GroupManager;
 import net.luckperms.api.model.user.User;
@@ -14,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,12 +23,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GrantManager {
 
-    public static GroupManager groupManager;
-    public static UserManager userManager;
-    public static QueryOptions staticQueryOptions;
-    public static  ConcurrentHashMap<UUID, RankSelector> selector;
-    public GrantManager() {
-        LuckPerms luckPerms = CorePlugin.getCore().getLuckPerms();
+    private static GroupManager groupManager;
+    private static UserManager userManager;
+    private static QueryOptions staticQueryOptions;
+    private static ConcurrentHashMap<UUID, RankSelector> selector;
+
+    public static void init() {
+        LuckPerms luckPerms = CorePlugin.getInstance().getLuckPerms();
         groupManager = luckPerms.getGroupManager();
         userManager = luckPerms.getUserManager();
         staticQueryOptions = luckPerms.getContextManager().getStaticQueryOptions();
@@ -34,11 +37,13 @@ public class GrantManager {
     }
 
     public static List<String> getGroups() {
-       return groupManager.getLoadedGroups().stream().map(Group::getName).toList();
+        return groupManager.getLoadedGroups().stream().map(Group::getName).toList();
     }
+
     public static Group getGroup(String group) {
         return groupManager.getGroup(group);
     }
+
     public static List<String> getStaffGroups() {
         Group staffGroup = groupManager.getGroup("staff");
         return groupManager.getLoadedGroups().stream()
@@ -62,6 +67,17 @@ public class GrantManager {
             userManager.saveUser(user);
         });
     }
+
+    public static void modifyGroup(UUID uuid, String groupName, Duration duration) {
+        userManager.loadUser(uuid).thenAcceptAsync(user -> {
+            InheritanceNode tempNode = InheritanceNode.builder(groupName)
+                    .expiry(duration)
+                    .build();
+            user.data().add(tempNode, TemporaryNodeMergeStrategy.REPLACE_EXISTING_IF_DURATION_LONGER);
+            userManager.saveUser(user);
+        });
+    }
+
     public static List<Group> getGroupsSorted() {
         return groupManager.getLoadedGroups().stream()
                 .sorted((g1, g2) -> {
@@ -71,6 +87,7 @@ public class GrantManager {
                 })
                 .toList();
     }
+
     public static User getUser(UUID uuid) {
         return userManager.getUser(uuid);
     }
@@ -79,7 +96,7 @@ public class GrantManager {
         List<String> usersWithPerm = new ArrayList<>();
         for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
             userManager.loadUser(offlinePlayer.getUniqueId()).thenAcceptAsync(user -> {
-                if(hasDirectPermission(user, permission)) {
+                if (hasDirectPermission(user, permission)) {
                     usersWithPerm.add(user.getUsername());
                 }
             });
@@ -93,15 +110,17 @@ public class GrantManager {
     }
 
     public static void selectGrant(Player player, OfflinePlayer target) {
-        if(selector.get(player.getUniqueId()) == null) {
+        if (selector.get(player.getUniqueId()) == null) {
             selector.put(player.getUniqueId(), new RankSelector(target.getName(), "default"));
             return;
         }
         get(player).setPlayerName(target.getName());
     }
+
     public static void remove(Player player) {
         selector.remove(player.getUniqueId());
     }
+
     public static RankSelector get(OfflinePlayer player) {
         return selector.get(player.getUniqueId());
     }
