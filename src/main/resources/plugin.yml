@@ -22,9 +22,7 @@ libraries:
   - "org.graalvm.js:js-scriptengine:24.2.1"
   - "org.graalvm.js:js-language:24.2.1"
 
-depend:
-  - WorldGuard
-  - WGRegionEvents
+
 
 softdepend:
   - PlaceholderAPI
