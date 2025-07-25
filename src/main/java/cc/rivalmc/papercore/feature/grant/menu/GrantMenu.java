@@ -16,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -26,29 +25,22 @@ import java.util.stream.Stream;
 )
 public class GrantMenu extends MenuBuilder {
 
-    // Create this method
+
     public static void open(Player player) {
         new GrantMenu().display(player);
     }
-
     @Override
     public void setupButtons() {
         OfflinePlayer target = Bukkit.getOfflinePlayerIfCached(GrantManager.get(player).getPlayerName());
-        AtomicReference<List<String>> lore = null;
-        GrantManager.userManager.loadUser(target.getUniqueId()).thenAcceptAsync(offlineUser -> {
-             lore.set(Stream.of(
-                             "§c§lUUID§8: §6%s",
-                             "§c§lRank§8: §6%s"
-                     ).map(new FormatterIterator(target.getUniqueId().toString(), offlineUser.getPrimaryGroup()))
-                     .toList());
-        });
+//        GrantManager.userManager.loadUser(target.getUniqueId()).thenAccept(offlineUser -> {
+//            List<String> lore = Stream.of(
+//                            "§c§lUUID§8: §6%s",
+//                            "§c§lRank§8: §6%s"
+//                    ).map(new FormatterIterator(target.getUniqueId().toString(), offlineUser.getPrimaryGroup()))
+//                    .toList();
+//        });
         ItemStack itemStack = new ItemBuilder().material(Material.CHEST).name("§3§lModify Player Rank").build();
-        ItemStack head = new ItemBuilder().material(Material.PLAYER_HEAD).lore(lore.get()).name("§6§l%s".formatted(target.getName())).build();
-        addButtons(new GuiSlotButton(MenuLayout.getSlot(4, 2), itemStack, RankMenu::open));
-        addButtons(new GuiSlotButton(MenuLayout.getSlot(5, 1), head));
-
-
-
+        addButtons(new GuiSlotButton(0, itemStack, RankMenu::open));
     }
 
     @Override

@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@Command(name = "teleport", permission = "rivalmc.teleport", aliases = {"tp", "goto"})
-public class TeleportCommand extends CommandBuilder {
+@Command(name = "tphere", permission = "rivalmc.tphere", aliases = {"s", "move"})
+public class TpHereCommand extends CommandBuilder {
 
     @Override
     public boolean perform(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
@@ -23,13 +23,8 @@ public class TeleportCommand extends CommandBuilder {
             sender.sendMessage(BasePlugin.getPrefix() + "§c Only players can use this command.");
             return true;
         }
-//        TODO: ADD IsVanish
-        if(!player.hasPermission("rivalmc.teleport.admin")) {
-            player.sendMessage("%s §cYou need to be on vanish mode to use this!".formatted(BasePlugin.getPrefix()));
-            return true;
-        }
         if(args.length == 0) {
-            player.sendMessage("%s §cChoose a player to teleport to".formatted(BasePlugin.getPrefix()));
+            player.sendMessage("%s §cChoose a player to move".formatted(BasePlugin.getPrefix()));
             return true;
         }
         Player target = Bukkit.getPlayer(args[0]);
@@ -37,9 +32,11 @@ public class TeleportCommand extends CommandBuilder {
             player.sendMessage("%s §cPlayer Not Found!".formatted(BasePlugin.getPrefix()));
             return true;
         }
-        Location loc = target.getLocation();
-        player.teleport(loc);
-        player.sendMessage("%s §7Teleported to §a%s".formatted(BasePlugin.getPrefix(), target.getName()));
+        Location loc = player.getLocation();
+        target.teleport(loc);
+        target.sendMessage("%s §7Teleported by §a%s".formatted(BasePlugin.getPrefix(), player.getName()));
+        SoundUtil.play(target, SoundUtil.SoundType.TELEPORT);
+        player.sendMessage("%s §7Teleported §a%s §7To You".formatted(BasePlugin.getPrefix(), target.getName()));
         SoundUtil.play(player, SoundUtil.SoundType.TELEPORT);
         return true;
     }

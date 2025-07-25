@@ -5,6 +5,7 @@ import cc.hubailmn.utility.command.CommandBuilder;
 import cc.hubailmn.utility.command.TabComplete;
 import cc.hubailmn.utility.command.annotation.Command;
 import cc.hubailmn.utility.interaction.SoundUtil;
+import cc.rivalmc.papercore.CorePlugin;
 import cc.rivalmc.papercore.feature.grant.manager.GrantManager;
 import cc.rivalmc.papercore.feature.grant.menu.GrantMenu;
 import org.bukkit.Bukkit;
@@ -29,7 +30,7 @@ public class GrantCommand extends CommandBuilder {
 
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
         GrantManager.selectGrant(player, offlinePlayer);
-        GrantMenu.open(player);
+            GrantMenu.open(player);
         SoundUtil.play(player, SoundUtil.SoundType.OPEN_MENU);
         return true;
     }
