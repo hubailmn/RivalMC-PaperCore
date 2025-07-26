@@ -172,7 +172,7 @@
         <dependency>
             <groupId>com.github.hubailmn</groupId>
             <artifactId>Utility</artifactId>
-            <version>dev-build-SNAPSHOT</version>
+            <version>v1.1.9</version>
         </dependency>
 
         <dependency>
